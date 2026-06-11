@@ -89,6 +89,19 @@
     body:not(.sidebar-collapsed) #sidebar-toggle {
         left: 315px;
     }
+   .skills-content .progress {
+    height: auto !important; /* Allows the container to scale with text */
+    margin-bottom: 25px;     /* Gives vertical space between different skills */
+    background: transparent; /* Prevents the container background from clipping text */
+    }
+
+    .skills-content .progress-bar-wrap {
+    background: #e2e8f0;    /* Light background track for the progress bar */
+    height: 10px;           /* Height of the actual bar line */
+    border-radius: 5px;
+    margin-top: 8px;        /* Pushes the bar line cleanly BELOW the text label */
+    overflow: hidden;
+    }
   </style>
   <style>
     .floating-form {
