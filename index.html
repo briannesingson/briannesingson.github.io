@@ -37,7 +37,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   
   <!-- Inline Style -->
-  <style>
+ <style>
     .wrapper {
         width: 600px;
         margin: 0 auto;
@@ -45,6 +45,49 @@
 
     table tr td:last-child {
         width: 200px;
+    }
+    
+    /* --- NEW COLLAPSIBLE SIDEBAR STYLES --- */
+    
+    /* Desktop Toggle Button positioning */
+    #sidebar-toggle {
+        position: fixed;
+        left: 15px;
+        top: 15px;
+        z-index: 9999;
+        border: 0;
+        font-size: 24px;
+        transition: all 0.4s;
+        background: #040b14;
+        color: #fff;
+        width: 40px;
+        height: 40px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    /* Transition modifications for layout shifting smoothly */
+    #header, #main, #hero, #footer {
+        transition: all 0.3s ease-in-out !important;
+    }
+
+    /* When sidebar is collapsed: push header left off screen */
+    body.sidebar-collapsed #header {
+        left: -300px;
+    }
+
+    /* When sidebar is collapsed: shift main elements back to full-width */
+    body.sidebar-collapsed #main, 
+    body.sidebar-collapsed #hero,
+    body.sidebar-collapsed #footer {
+        margin-left: 0 !important;
+    }
+    
+    /* Move the toggle button slightly out when sidebar is open to not overlap profile */
+    body:not(.sidebar-collapsed) #sidebar-toggle {
+        left: 315px;
     }
   </style>
   <style>
@@ -62,6 +105,11 @@
   <script>
     $(document).ready(function() {
         $('[data-toggle="tooltip"]').tooltip();
+
+        // New logic to toggle sidebar
+        $("#sidebar-toggle").on("click", function() {
+            $("body").toggleClass("sidebar-collapsed");
+        });
     });
   </script>
  </head>
@@ -70,6 +118,8 @@
 
   <!-- ======= Mobile nav toggle button ======= -->
   <i class="bi bi-list mobile-nav-toggle d-xl-none"></i>
+  <i class="bi bi-list desktop-nav-toggle d-none d-xl-flex" id="sidebar-toggle"></i>
+  
 
   <!-- ======= Header ======= -->
   <header id="header">
